@@ -1,7 +1,7 @@
 machine:
   environment:
     HALCYON_INSTALL: /tmp/halcyon
-    HALCYON_BASE: ${HOME}/app
+    HALCYON_BASE: /app
 
 dependencies:
   cache_directories:
@@ -9,6 +9,7 @@ dependencies:
 
   override:
     - mkdir -p ~/app
+    - sudo ln -sf ~/app $HALCYON_BASE
     - git clone https://github.com/mietek/halcyon.git $HALCYON_INSTALL
     - mv ~/.cabal/config ~/.cabal/config.original
     - $HALCYON_INSTALL/halcyon build --dependencies-only
