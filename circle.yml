@@ -20,3 +20,9 @@ test:
     - $HALCYON_INSTALL/halcyon paths > halcyon-env
     - ln -sf ${HALCYON_BASE}/sandbox/cabal.sandbox.config cabal.sandbox.config
     - source halcyon-env && cabal configure --enable-tests && cabal test
+
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: mighty-scrubland-6584
