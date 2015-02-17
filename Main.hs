@@ -65,4 +65,5 @@ main = do
         home = maybe "Welcome to Haskell on Heroku" T.pack $
                  lookup "TUTORIAL_HOME" env
     notes <- emptyNotes
+    return ()
     run port $ serve noteAPI $ server home notes
