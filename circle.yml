@@ -5,13 +5,13 @@ dependencies:
   override:
     - sudo mkdir -p /app
     - sudo chown $USER /app
-    - git clone https://github.com/mietek/halcyon.git /app/halcyon
+    - git clone https://github.com/mietek/halcyon.git /tmp/halcyon
     - mv ~/.cabal/config ~/.cabal/config.original
-    - /app/halcyon/halcyon build --dependencies-only
+    - /tmp/halcyon/halcyon build --dependencies-only
 
 test:
   override:
-    - /app/halcyon/halcyon build
-    - /app/halcyon/halcyon paths > halcyon-env
+    - /tmp/halcyon/halcyon build
+    - /tmp/halcyon/halcyon paths > halcyon-env
     - ln -sf /app/sandbox/cabal.sandbox.config cabal.sandbox.config
     - source halcyon-env && cabal configure --enable-tests && cabal test
