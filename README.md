@@ -2,6 +2,7 @@ _haskell-on-heroku-tutorial_
 ============================
 
 [![Circle CI](https://circleci.com/gh/rimmington/haskell-on-heroku-tutorial.svg?style=svg)](https://circleci.com/gh/rimmington/haskell-on-heroku-tutorial)
+[![Coverage Status](https://coveralls.io/repos/rimmington/haskell-on-heroku-tutorial/badge.svg?branch=master)](https://coveralls.io/r/rimmington/haskell-on-heroku-tutorial?branch=master)
 
 Companion app for the [Haskell on Heroku tutorial](https://haskellonheroku.com/tutorial/).
 
