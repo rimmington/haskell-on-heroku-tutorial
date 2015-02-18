@@ -1,3 +1,5 @@
+module API where
+
 import Control.Concurrent.STM
 import Control.Monad.IO.Class
 import Data.Aeson
@@ -5,7 +7,7 @@ import Data.Proxy
 import Data.Text
 import GHC.Generics
 import Network.Wai.Handler.Warp
-import Servant
+import Servant.API
 import System.Environment
 import System.IO
 
@@ -16,7 +18,7 @@ import qualified Data.Text.IO as T
 newtype Note = Note
     { contents :: Text
     }
-  deriving (Generic, Show)
+  deriving (Generic, Show, Eq)
 
 instance FromJSON Note
 instance ToJSON Note
@@ -50,20 +52,3 @@ noteAPI :: Proxy NoteAPI
 noteAPI =
     Proxy
 
-server :: Text -> TVar [Note] -> Server NoteAPI
-server home notes =
-         return home
-    :<|> getNotes notes
-    :<|> postNote notes
-
-
-main :: IO ()
-main = do
-    hSetBuffering stdout LineBuffering
-    env <- getEnvironment
-    let port = maybe 8080 read $ lookup "PORT" env
-        home = maybe "Welcome to Haskell on Heroku" T.pack $
-                 lookup "TUTORIAL_HOME" env
-    notes <- emptyNotes
-    return ()
-    run port $ serve noteAPI $ server home notes
