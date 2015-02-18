@@ -18,4 +18,5 @@ extra-packages: ! 'Hackage: string-conversions 0.3.0.3
 
   Hackage: servant 0.2.1'
 ghc-args: []
-excluded-modules: []
+excluded-modules:
+- test/Spec.hs
