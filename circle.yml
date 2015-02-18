@@ -19,12 +19,18 @@ dependencies:
     - ln -sf ${HALCYON_BASE}/sandbox/cabal.sandbox.config cabal.sandbox.config
     - source halcyon-env && cabal install --only-dependencies --enable-tests
 
+  post:
+    - source halcyon-env && cabal install hpc-coveralls
+
 test:
   pre:
     - $HALCYON_INSTALL/halcyon build
 
   override:
-    - source halcyon-env && cabal configure --enable-tests && cabal test
+    - source halcyon-env && cabal configure --enable-tests --enable-library-coverage && cabal test
+
+  post:
+    - source halcyon-env && hpc-coveralls --repo-token=$COVERALLS_REPO_TOKEN --exclude-dir=test --exclude-dir=exec spec
 
 deployment:
   production:
