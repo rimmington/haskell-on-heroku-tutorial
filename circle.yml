@@ -7,18 +7,23 @@ dependencies:
   cache_directories:
     - ~/app
 
-  override:
+  pre:
     - mkdir -p ~/app
     - sudo ln -sf ~/app $HALCYON_BASE
     - git clone https://github.com/mietek/halcyon.git $HALCYON_INSTALL
     - mv ~/.cabal/config ~/.cabal/config.original
-    - $HALCYON_INSTALL/halcyon build --dependencies-only
 
-test:
   override:
-    - $HALCYON_INSTALL/halcyon build
+    - $HALCYON_INSTALL/halcyon build --dependencies-only
     - $HALCYON_INSTALL/halcyon paths > halcyon-env
     - ln -sf ${HALCYON_BASE}/sandbox/cabal.sandbox.config cabal.sandbox.config
+    - source halcyon-env && cabal install --only-dependencies --enable-tests
+
+test:
+  pre:
+    - $HALCYON_INSTALL/halcyon build
+
+  override:
     - source halcyon-env && cabal configure --enable-tests && cabal test
 
 deployment:

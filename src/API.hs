@@ -6,12 +6,8 @@ import Data.Aeson
 import Data.Proxy
 import Data.Text
 import GHC.Generics
-import Network.Wai.Handler.Warp
 import Servant.API
-import System.Environment
-import System.IO
 
-import qualified Data.Text as T
 import qualified Data.Text.IO as T
 
 
