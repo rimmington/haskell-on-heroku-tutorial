@@ -6,12 +6,12 @@ import API
 
 spec :: Spec
 spec = do
-    describe "getNotes" $ do
+    describe "getNotes" $
         it "returns empty note lists" $ do
             notes <- emptyNotes
             getNotes notes `shouldReturn` []
 
-    describe "postNote" $ do
+    describe "postNote" $
         it "adds notes" $ do
             notes <- emptyNotes
             let note = Note "My note"
