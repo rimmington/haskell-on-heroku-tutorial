@@ -3,6 +3,10 @@ machine:
     HALCYON_INSTALL: /tmp/halcyon
     HALCYON_BASE: /app
 
+general:
+  artifacts:
+    - report.html
+
 dependencies:
   cache_directories:
     - ~/app
@@ -20,13 +24,14 @@ dependencies:
     - source halcyon-env && cabal install --only-dependencies --enable-tests
 
   post:
-    - source halcyon-env && cabal install hpc-coveralls
+    - source halcyon-env && cabal install hpc-coveralls hlint
 
 test:
   pre:
     - $HALCYON_INSTALL/halcyon build
 
   override:
+    - source halcyon-env && hlint . --report
     - source halcyon-env && cabal configure --enable-tests --enable-library-coverage && cabal test
 
   post:
